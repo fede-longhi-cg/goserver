@@ -19,7 +19,7 @@ func main(){
 		log.Fatal("$PORT must be set")
 	}
 
-	s = &server{}
+	s := &server{}
 	http.Handle("/", s)
 
 	log.Fatal(http.ListenAndServe(":"+port, nil))
