@@ -1,1 +1,1 @@
-web: bin/goserver
+web: bin/main
