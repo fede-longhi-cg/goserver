@@ -41,7 +41,7 @@ func regs(w http.ResponseWriter, r *http.Request) {
 func loopHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	if r.Method == "GET" {
-		number, err := strconv.Atoi(r.URL.Path[len("/loop/"):])
+		err, number := strconv.Atoi(r.URL.Path[len("/loop/"):])
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			w.Write([]byte(`should be a number`))
