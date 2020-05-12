@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 
 	"github.com/gorilla/mux"
 )
@@ -40,23 +41,20 @@ import (
 func loopHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	if r.Method == "GET" {
-		stringNumber := r.URL.Path
-		// number, err := strconv.Atoi()
-		w.WriteHeader(http.StatusOK)
-		w.Write([]byte(stringNumber))
-		// if err != nil {
-		// 	w.WriteHeader(http.StatusBadRequest)
-		// 	w.Write([]byte(`should be a number`))
-		// } else {
-		// 	w.WriteHeader(http.StatusOK)
-		// 	body := "["
-		// 	for i := 0; i < number; i++ {
-		// 		body += strconv.Itoa(i) + ","
-		// 	}
+		vars := mux.Vars(r)
+		number, err := strconv.Atoi(vars["number"])
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			w.Write([]byte(`should be a number`))
+		} else {
+			w.WriteHeader(http.StatusOK)
+			body := "["
+			for i := 0; i < number; i++ {
+				body += strconv.Itoa(i) + ","
+			}
 
-		// 	w.Write([]byte(body))
-		// }
-
+			w.Write([]byte(body))
+		}
 	}
 }
 
@@ -70,7 +68,7 @@ func main() {
 
 	//router.HandleFunc("/", homeLink)
 	//router.HandleFunc("/regs-01", regs)
-	router.HandleFunc("/loop/", loopHandler)
+	router.HandleFunc("/loop/{number}", loopHandler)
 
 	log.Fatal(http.ListenAndServe(":"+port, router))
 }
