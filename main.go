@@ -41,19 +41,21 @@ func regs(w http.ResponseWriter, r *http.Request) {
 func loopHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	if r.Method == "GET" {
-		err, number := strconv.Atoi(r.URL.Path[len("/loop/"):])
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			w.Write([]byte(`should be a number`))
-		} else {
-			w.WriteHeader(http.StatusOK)
-			body := "["
-			for i := 0; i < number; i++ {
-				body += strconv.Itoa(i) + ","
-			}
+		number, err := strconv.Atoi(r.URL.Path[len("/loop/"):])
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte(number))
+		// if err != nil {
+		// 	w.WriteHeader(http.StatusBadRequest)
+		// 	w.Write([]byte(`should be a number`))
+		// } else {
+		// 	w.WriteHeader(http.StatusOK)
+		// 	body := "["
+		// 	for i := 0; i < number; i++ {
+		// 		body += strconv.Itoa(i) + ","
+		// 	}
 
-			w.Write([]byte(body))
-		}
+		// 	w.Write([]byte(body))
+		// }
 
 	}
 }
