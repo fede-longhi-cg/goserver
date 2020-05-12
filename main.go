@@ -4,7 +4,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"strconv"
 
 	"github.com/gorilla/mux"
 )
@@ -41,9 +40,10 @@ func regs(w http.ResponseWriter, r *http.Request) {
 func loopHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	if r.Method == "GET" {
-		number, err := strconv.Atoi(r.URL.Path[len("/loop/"):])
+		stringNumber := r.URL.Path[len("/loop/"):]
+		// number, err := strconv.Atoi()
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte(number))
+		w.Write([]byte(stringNumber))
 		// if err != nil {
 		// 	w.WriteHeader(http.StatusBadRequest)
 		// 	w.Write([]byte(`should be a number`))
