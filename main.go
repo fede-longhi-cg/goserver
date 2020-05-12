@@ -68,7 +68,7 @@ func main() {
 
 	router.HandleFunc("/", homeLink)
 	router.HandleFunc("/regs-01", regs)
-	router.HandleFunc("/loop", loopHandler)
+	router.HandleFunc("/loop/", loopHandler)
 
 	log.Fatal(http.ListenAndServe(":"+port, router))
 }
