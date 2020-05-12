@@ -33,7 +33,7 @@ func regs(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	if r.Method == "GET" {
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte(`{"message": ["1","2","3"]`))
+		w.Write([]byte(`{"message": ["1","2","3"]}`))
 	}
 }
 
