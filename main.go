@@ -32,7 +32,7 @@ func homeLink(w http.ResponseWriter, r *http.Request) {
 func regs(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	if r.Method == "GET" {
-		w.WriteHeader(http.StatusOk)
+		w.WriteHeader(http.StatusOK)
 		w.Write([]byte(`{"message": ["1","2","3"]`))
 	}
 }
