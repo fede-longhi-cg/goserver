@@ -60,6 +60,13 @@ func loopHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func holaJosi(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte(`Hola Josi, te amo pastelito`))
+
+}
+
 func main() {
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -71,6 +78,7 @@ func main() {
 	router.HandleFunc("/", homeLink)
 	router.HandleFunc("/regs-01", regs)
 	router.HandleFunc("/loop/", loopHandler)
+	router.HandleFunc("/0123217839213712", holaJosi)
 
 	log.Fatal(http.ListenAndServe(":"+port, router))
 }
