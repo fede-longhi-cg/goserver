@@ -29,11 +29,11 @@ func homeLink(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func regs01(w http.ResponseWriter, r *http.Request) {
+func regs(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	if r.Method == "GET" {
 		w.WriteHeader(http.StatusOk)
-		W.Write([]byte(`{"message": ["1","2","3"]`))
+		w.Write([]byte(`{"message": ["1","2","3"]`))
 	}
 }
 
@@ -46,7 +46,7 @@ func main() {
 	router := mux.NewRouter().StrictSlash(true)
 
 	router.HandleFunc("/", homeLink)
-	router.HandleFunc("/regs-01", regs01)
+	router.HandleFunc("/regs-01", regs)
 
 	log.Fatal(http.ListenAndServe(":"+port, router))
 }
