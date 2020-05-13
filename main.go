@@ -41,7 +41,7 @@ func homeLink(w http.ResponseWriter, r *http.Request) {
 
 func regs01(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	if r.Method == "GET" {
+	if r.Method == "POST" {
 		b, err := ioutil.ReadAll(r.Body)
 		defer r.Body.Close()
 		if err != nil {
