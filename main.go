@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+	"strings"
 
 	"github.com/gorilla/mux"
 )
@@ -30,11 +31,33 @@ func homeLink(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func regs(w http.ResponseWriter, r *http.Request) {
+func regs01(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	if r.Method == "GET" {
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte(`{"message": ["1","2","3"]}`))
+		w.Write([]byte(`{"message": ["description1","description2","description3"]}`))
+	}
+}
+
+func regs01Params(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	if r.Method == "GET" {
+		params := mux.Vars(r)
+		country := params["country"]
+		clientType := params["clientType"]
+
+		var bodyArray []string
+
+		bodyArray = append(bodyArray, "description 1-> "+country+"-"+clientType)
+		bodyArray = append(bodyArray, "description 2")
+		bodyArray = append(bodyArray, "description 3")
+		bodyArray = append(bodyArray, "description 4")
+
+		bodyString := "["
+		bodyString += strings.Join(bodyArray, ",")
+		bodyString += "]"
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte(bodyString))
 	}
 }
 
@@ -67,7 +90,8 @@ func main() {
 	router := mux.NewRouter().StrictSlash(true)
 
 	router.HandleFunc("/", homeLink)
-	router.HandleFunc("/regs-01", regs)
+	router.HandleFunc("/regs-01/country/{country}/client-type/{clientType}", regs01Params)
+	router.HandleFunc("/regs-01/", regs01)
 	router.HandleFunc("/loop/{number}", loopHandler)
 
 	log.Fatal(http.ListenAndServe(":"+port, router))
