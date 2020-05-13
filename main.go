@@ -14,8 +14,8 @@ import (
 
 //Message structure
 type Message struct {
-	ID   int64  `json:"id"`
-	Name string `json:"name"`
+	Country    string `json:"country"`
+	ClientType string `json:"client-type"`
 }
 
 func homeLink(w http.ResponseWriter, r *http.Request) {
