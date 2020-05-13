@@ -95,7 +95,7 @@ func writeBodyForReg(country string, clientType string) string {
 	bodyArray = append(bodyArray, `"description 3"`)
 	bodyArray = append(bodyArray, `"description 4"`)
 
-	bodyString := `{"message" : ["`
+	bodyString := `{"message" : [`
 	bodyString += strings.Join(bodyArray, ",")
 	bodyString += "]}"
 
