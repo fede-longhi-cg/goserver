@@ -1,6 +1,8 @@
 package main
 
 import (
+	"encoding/json"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -9,6 +11,12 @@ import (
 
 	"github.com/gorilla/mux"
 )
+
+//Message structure
+type Message struct {
+	ID   int64  `json:"id"`
+	Name string `json:"name"`
+}
 
 func homeLink(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
@@ -34,8 +42,29 @@ func homeLink(w http.ResponseWriter, r *http.Request) {
 func regs01(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	if r.Method == "GET" {
+		b, err := ioutil.ReadAll(r.Body)
+		defer r.Body.Close()
+		if err != nil {
+			http.Error(w, err.Error(), 500)
+			return
+		}
+
+		// Unmarshal
+		var msg Message
+		err = json.Unmarshal(b, &msg)
+		if err != nil {
+			http.Error(w, err.Error(), 500)
+			return
+		}
+
+		output, err := json.Marshal(msg)
+		if err != nil {
+			http.Error(w, err.Error(), 500)
+			return
+		}
+
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte(`{"message": ["description1","description2","description3"]}`))
+		w.Write([]byte(output))
 	}
 }
 
@@ -46,19 +75,26 @@ func regs01Params(w http.ResponseWriter, r *http.Request) {
 		country := params["country"]
 		clientType := params["clientType"]
 
-		var bodyArray []string
+		bodyString := writeBodyForReg(country, clientType)
 
-		bodyArray = append(bodyArray, "description 1-> "+country+"-"+clientType)
-		bodyArray = append(bodyArray, "description 2")
-		bodyArray = append(bodyArray, "description 3")
-		bodyArray = append(bodyArray, "description 4")
-
-		bodyString := "["
-		bodyString += strings.Join(bodyArray, ",")
-		bodyString += "]"
 		w.WriteHeader(http.StatusOK)
 		w.Write([]byte(bodyString))
 	}
+}
+
+func writeBodyForReg(country string, clientType string) string {
+	var bodyArray []string
+
+	bodyArray = append(bodyArray, "description 1-> "+country+"-"+clientType)
+	bodyArray = append(bodyArray, "description 2")
+	bodyArray = append(bodyArray, "description 3")
+	bodyArray = append(bodyArray, "description 4")
+
+	bodyString := "["
+	bodyString += strings.Join(bodyArray, ",")
+	bodyString += "]"
+
+	return bodyString
 }
 
 func loopHandler(w http.ResponseWriter, r *http.Request) {
