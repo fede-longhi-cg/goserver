@@ -90,14 +90,14 @@ func regs01Params(w http.ResponseWriter, r *http.Request) {
 func writeBodyForReg(country string, clientType string) string {
 	var bodyArray []string
 
-	bodyArray = append(bodyArray, "description 1-> "+country+"-"+clientType)
-	bodyArray = append(bodyArray, "description 2")
-	bodyArray = append(bodyArray, "description 3")
-	bodyArray = append(bodyArray, "description 4")
+	bodyArray = append(bodyArray, `"description 1-> `+country+"-"+clientType)
+	bodyArray = append(bodyArray, `"description 2"`)
+	bodyArray = append(bodyArray, `"description 3"`)
+	bodyArray = append(bodyArray, `"description 4"`)
 
-	bodyString := "["
+	bodyString := `{"message" : ["`
 	bodyString += strings.Join(bodyArray, ",")
-	bodyString += "]"
+	bodyString += "]}"
 
 	return bodyString
 }
