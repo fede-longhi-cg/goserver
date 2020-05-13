@@ -57,14 +57,19 @@ func regs01(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		output, err := json.Marshal(msg)
-		if err != nil {
-			http.Error(w, err.Error(), 500)
-			return
-		}
+		clientType := msg.ClientType
+		country := msg.Country
+
+		bodyString := writeBodyForReg(country, clientType)
+
+		// output, err := json.Marshal(msg)
+		// if err != nil {
+		// 	http.Error(w, err.Error(), 500)
+		// 	return
+		// }
 
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte(output))
+		w.Write([]byte(bodyString))
 	}
 }
 
