@@ -75,6 +75,8 @@ func loopHandler(w http.ResponseWriter, r *http.Request) {
 			for i := 0; i < number; i++ {
 				body += strconv.Itoa(i) + ","
 			}
+			body = body[:len(body)-1]
+			body += "]"
 
 			w.Write([]byte(body))
 		}
