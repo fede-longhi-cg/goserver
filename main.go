@@ -62,12 +62,6 @@ func regs01(w http.ResponseWriter, r *http.Request) {
 
 		bodyString := writeBodyForReg(country, clientType)
 
-		// output, err := json.Marshal(msg)
-		// if err != nil {
-		// 	http.Error(w, err.Error(), 500)
-		// 	return
-		// }
-
 		w.WriteHeader(http.StatusOK)
 		w.Write([]byte(bodyString))
 	}
@@ -75,12 +69,13 @@ func regs01(w http.ResponseWriter, r *http.Request) {
 
 func regs01Params(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
+	clientID := r.Header.Get("client-id")
 	if r.Method == "GET" {
 		params := mux.Vars(r)
 		country := params["country"]
-		clientType := params["clientType"]
+		//clientType := params["clientType"]
 
-		bodyString := writeBodyForReg(country, clientType)
+		bodyString := writeBodyForReg(country, clientID)
 
 		w.WriteHeader(http.StatusOK)
 		w.Write([]byte(bodyString))
