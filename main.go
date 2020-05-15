@@ -42,6 +42,7 @@ func homeLink(w http.ResponseWriter, r *http.Request) {
 func regs01(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	if r.Method == "POST" {
+		w.WriteHeader(http.StatusOK)
 		b, err := ioutil.ReadAll(r.Body)
 		defer r.Body.Close()
 		if err != nil {
@@ -62,7 +63,6 @@ func regs01(w http.ResponseWriter, r *http.Request) {
 
 		bodyString := writeBodyForReg(country, clientType)
 
-		w.WriteHeader(http.StatusOK)
 		w.Write([]byte(bodyString))
 	} else {
 		w.WriteHeader(http.StatusAccepted)
@@ -133,7 +133,7 @@ func main() {
 
 	router.HandleFunc("/", homeLink)
 	router.HandleFunc("/regs-01/country/{country}/client-type/{clientType}", regs01Params)
-	router.HandleFunc("/regs-01/", regs01)
+	router.HandleFunc("/regs01/", regs01)
 	router.HandleFunc("/loop/{number}", loopHandler)
 
 	log.Fatal(http.ListenAndServe(":"+port, router))
