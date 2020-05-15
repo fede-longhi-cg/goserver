@@ -70,12 +70,14 @@ func regs01(w http.ResponseWriter, r *http.Request) {
 func regs01Params(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	clientID := r.Header.Get("client-id")
-	if r.Method == "GET" {
+	if clientID != "fede" {
+		w.WriteHeader(http.StatusUnauthorized)
+	} else if r.Method == "GET" {
 		params := mux.Vars(r)
 		country := params["country"]
-		//clientType := params["clientType"]
+		clientType := params["clientType"]
 
-		bodyString := writeBodyForReg(country, clientID)
+		bodyString := writeBodyForReg(country, clientType)
 
 		w.WriteHeader(http.StatusOK)
 		w.Write([]byte(bodyString))
