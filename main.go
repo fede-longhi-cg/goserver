@@ -1,8 +1,6 @@
 package main
 
 import (
-	"encoding/json"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -43,27 +41,27 @@ func regs01(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	if r.Method == "POST" {
 		w.WriteHeader(http.StatusOK)
-		b, err := ioutil.ReadAll(r.Body)
-		defer r.Body.Close()
-		if err != nil {
-			http.Error(w, err.Error(), 500)
-			return
-		}
+		// b, err := ioutil.ReadAll(r.Body)
+		// defer r.Body.Close()
+		// if err != nil {
+		// 	http.Error(w, err.Error(), 500)
+		// 	return
+		// }
 
-		// Unmarshal
-		var msg Message
-		err = json.Unmarshal(b, &msg)
-		if err != nil {
-			http.Error(w, err.Error(), 500)
-			return
-		}
+		// // Unmarshal
+		// var msg Message
+		// err = json.Unmarshal(b, &msg)
+		// if err != nil {
+		// 	http.Error(w, err.Error(), 500)
+		// 	return
+		// }
 
-		clientType := msg.ClientType
-		country := msg.Country
+		// clientType := msg.ClientType
+		// country := msg.Country
 
-		bodyString := writeBodyForReg(country, clientType)
+		// bodyString := writeBodyForReg(country, clientType)
 
-		w.Write([]byte(bodyString))
+		// w.Write([]byte(bodyString))
 	} else {
 		w.WriteHeader(http.StatusAccepted)
 	}
