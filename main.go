@@ -72,7 +72,8 @@ func regs01(w http.ResponseWriter, r *http.Request) {
 func regs01Params(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	clientID := r.Header.Get("client-id")
-	if clientID != "fede" {
+	clientPass := r.Header.Get("client-pass")
+	if clientID != "fede" || clientPass != "cloudgaia1" {
 		w.WriteHeader(http.StatusUnauthorized)
 	} else if r.Method == "GET" {
 		params := mux.Vars(r)
