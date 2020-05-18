@@ -134,7 +134,7 @@ func main() {
 
 	router.HandleFunc("/", homeLink)
 	router.HandleFunc("/regs-01/country/{country}/client-type/{clientType}", regs01Params)
-	router.HandleFunc("/regs01", regs01)
+	router.HandleFunc("/regs-01", regs01)
 	router.HandleFunc("/loop/{number}", loopHandler)
 
 	log.Fatal(http.ListenAndServe(":"+port, router))
