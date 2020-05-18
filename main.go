@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -141,8 +142,8 @@ func regs02Params(w http.ResponseWriter, r *http.Request) {
 		// body += `{"doc-number": ` + docNumber + `,"doc-type": ` + docType + `,"name": "Fede", "lastName":"Longhi"}]`
 		body := ""
 		body += docType + docNumber
-
-		w.Write([]byte(body))
+		fmt.Println(body)
+		w.Write([]byte("body"))
 	}
 }
 
