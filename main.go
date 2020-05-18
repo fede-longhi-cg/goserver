@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -138,12 +137,10 @@ func regs02Params(w http.ResponseWriter, r *http.Request) {
 		params := mux.Vars(r)
 		docType := params["doc-type"]
 		docNumber := params["doc-number"]
-		// body := `[{"doc-number": "123456789","doc-type": "dni", "name":"Fede", "lastname":"Longhi"}, {"doc-number": "987654321","doc-type": "passport", "name":"Fede", "lastname":"Longhi"},`
-		// body += `{"doc-number": ` + docNumber + `,"doc-type": ` + docType + `,"name": "Fede", "lastName":"Longhi"}]`
-		body := ""
-		body += docType + docNumber
-		fmt.Println(body)
-		w.Write([]byte("body"))
+		body := `[{"doc-number": "123456789","doc-type": "dni", "name":"Fede", "lastname":"Longhi"}, {"doc-number": "987654321","doc-type": "passport", "name":"Fede", "lastname":"Longhi"},`
+		body += `{"doc-number": ` + `"` + docNumber + `"` + `,"doc-type": ` + `"` + docType + `"` + `,"name": "Fede", "lastName":"Longhi"}]`
+
+		w.Write([]byte(body))
 	}
 }
 
