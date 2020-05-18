@@ -124,6 +124,26 @@ func loopHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func regs02(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	if r.Method == "POST" {
+		w.Write([]byte(`{"message": "hola!"}`))
+	}
+}
+
+func regs02Params(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	if r.Method == "GET" {
+		params := mux.Vars(r)
+		docType := params["doc-type"]
+		docNumber := params["doc-number"]
+		body := `[{"doc-number": "123456789","doc-type": "dni", "name":"Fede", "lastname":"Longhi"}, {"doc-number": "987654321","doc-type": "passport", "name":"Fede", "lastname":"Longhi"},`
+		body += `{"doc-number": ` + docNumber + `,"doc-type": ` + docType + `,"name": "Fede", "lastName":"Longhi"}]`
+
+		w.Write([]byte(body))
+	}
+}
+
 func main() {
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -135,6 +155,8 @@ func main() {
 	router.HandleFunc("/", homeLink)
 	router.HandleFunc("/regs-01/country/{country}/client-type/{clientType}", regs01Params)
 	router.HandleFunc("/regs-01", regs01)
+	router.HandleFunc("/regs-02/doc-type/{doc-type}/doc-number/{doc-number}", regs02Params)
+	router.HandleFunc("/regs-02", regs02)
 	router.HandleFunc("/loop/{number}", loopHandler)
 
 	log.Fatal(http.ListenAndServe(":"+port, router))
