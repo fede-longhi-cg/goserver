@@ -151,7 +151,7 @@ func orderService(w http.ResponseWriter, r *http.Request) {
 		clientID := params["clientId"]
 		body := `[
 			{
-			id: "abc123",
+			id: ` + `"` + clientID + `"` + `,
 			nombreDamnificado: "Juan Jose Lopez",
 			nombreAsegurado: "Pedro Alberto Poroto",
 			estado: "Nuevo",
