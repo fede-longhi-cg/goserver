@@ -144,6 +144,97 @@ func regs02Params(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func orderService(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	if r.Method == "GET" {
+		params := mux.Vars(r)
+		clientID := params["clientId"]
+		body := `[
+			{
+			id: "abc123",
+			nombreDamnificado: "Juan Jose Lopez",
+			nombreAsegurado: "Pedro Alberto Poroto",
+			estado: "Nuevo",
+			subEstado: "",
+			numeroSiniestro: "1234567890",
+			idSiniestro: "asfv1234",
+			patente: "AB 202 CC",
+			fechaAsignacion: "20/03/2020",
+			fechaVencimiento: "20/09/2020",
+			ultimaModificacion: "18/06/2020 12:20:00",
+			nivelDano: "Lesion Leve",
+			nombreGestorReclamo: "Martin Ferro",
+			nombreGestorSiniestro: "Jose Ignacio Gonzalez",
+			coreOrigen: "GW",
+			urlNova: "https://www.google.com",
+			urlCaraturla: "http://www.pdf995.com/samples/pdf.pdf",
+			urlDenuncia: "http://www.pdf995.com/samples/pdf.pdf"
+			},
+			{
+				id: "abc123",
+				nombreDamnificado: "Juan Jose Lopez",
+				nombreAsegurado: "",
+				estado: "En Progreso",
+				subEstado: "",
+				numeroSiniestro: "1234567890",
+				idSiniestro: "asfv1234",
+				patente: "GHB 233",
+				fechaAsignacion: "18/06/2020",
+				fechaVencimiento: "20/09/2020",
+				ultimaModificacion: "18/06/2020 12:20:00",
+				nivelDano: "Muerte",
+				nombreGestorReclamo: "Martin Ferro",
+				nombreGestorSiniestro: "Jose Ignacio Gonzalez",
+				coreOrigen: "Nova",
+				urlNova: "https://www.google.com",
+				urlCaraturla: "http://www.pdf995.com/samples/pdf.pdf",
+				urlDenuncia: "http://www.pdf995.com/samples/pdf.pdf"
+			},
+			{
+				id: "abc123",
+				nombreDamnificado: "Juan Jose Lopez",
+				nombreAsegurado: "",
+				estado: "En Progreso",
+				subEstado: "Honorarios Habilitados",
+				numeroSiniestro: "1234567890",
+				idSiniestro: "asfv1234",
+				patente: "A123",
+				fechaAsignacion: "18/06/2020",
+				fechaVencimiento: "20/09/2020",
+				ultimaModificacion: "18/06/2020 12:20:00",
+				nivelDano: "Lesion Grave",
+				nombreGestorReclamo: "Martin Ferro",
+				nombreGestorSiniestro: "Jose Ignacio Gonzalez",
+				coreOrigen: "GW",
+				urlNova: "https://www.google.com",
+				urlCaraturla: "http://www.pdf995.com/samples/pdf.pdf",
+				urlDenuncia: "http://www.pdf995.com/samples/pdf.pdf"
+			},
+			{
+				id: "abc123",
+				nombreDamnificado: "Juan Jose Lopez",
+				nombreAsegurado: "Pedro Alberto Poroto",
+				estado: "Realizado",
+				subEstado: "Honorarios Pendientes",
+				numeroSiniestro: "1234567890",
+				idSiniestro: "asfv1234",
+				patente: "A123",
+				fechaAsignacion: "20/03/2020" ,
+				fechaVencimiento: "20/09/2020",
+				ultimaModificacion: "18/06/2020 12:20:00",
+				nivelDano: "Lesion Leve",
+				nombreGestorReclamo: "Martin Ferro",
+				nombreGestorSiniestro: "Jose Ignacio Gonzalez",
+				coreOrigen: "Nova",
+				urlNova: "https://www.google.com",
+				urlCaraturla: "http://www.pdf995.com/samples/pdf.pdf",
+				urlDenuncia: "http://www.pdf995.com/samples/pdf.pdf"
+			}
+		]`
+		w.Write([]byte(body))
+	}
+}
+
 func main() {
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -153,6 +244,7 @@ func main() {
 	router := mux.NewRouter().StrictSlash(true)
 
 	router.HandleFunc("/", homeLink)
+	router.HandleFunc("/client/{clientId}/ordenesDeServicio", orderService)
 	router.HandleFunc("/regs-01/country/{country}/client-type/{clientType}", regs01Params)
 	router.HandleFunc("/regs-01", regs01)
 	router.HandleFunc("/regs-02/doc-type/{doc-type}/doc-number/{doc-number}", regs02Params)
