@@ -150,8 +150,8 @@ func check(e error) {
 	}
 }
 
-func readFile() []byte {
-	file, err := os.Open("./resources/ordenes.JSON")
+func readFile(filename string) []byte {
+	file, err := os.Open(filename)
 	check(err)
 	defer file.Close()
 
@@ -166,92 +166,8 @@ func orderService(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
 		// params := mux.Vars(r)
 		// clientID := params["clientId"]
-		body := readFile()
-		// body := "123"
-		// body :=
-		// 	`[
-		// 	{
-		// 		"id": ` + `"` + clientID + `"` + `,
-		// 		"nombreDamnificado": "Juan Jose Lopez",
-		// 		"nombreAsegurado": "Pedro Alberto Poroto",
-		// 		"estado": "Nuevo",
-		// 		"subEstado": "",
-		// 		"numeroSiniestro": "1234567890",
-		// 		"idSiniestro": "asfv1234",
-		// 		"patente": "AB 202 CC",
-		// 		"fechaAsignacion": "20/03/2020",
-		// 		"fechaVencimiento": "20/09/2020",
-		// 		"ultimaModificacion": "18/06/2020 12:20:00",
-		// 		"nivelDano": "Lesion Leve",
-		// 		"nombreGestorReclamo": "Martin Ferro",
-		// 		"nombreGestorSiniestro": "Jose Ignacio Gonzalez",
-		// 		"coreOrigen": "GW",
-		// 		"urlNova": "https://www.google.com",
-		// 		"urlCaraturla": "http://www.pdf995.com/samples/pdf.pdf",
-		// 		"urlDenuncia": "http://www.pdf995.com/samples/pdf.pdf"
-		// 	},
-		// 	{
-		// 		"id": "abc123",
-		// 		"nombreDamnificado": "Juan Jose Lopez",
-		// 		"nombreAsegurado": "",
-		// 		"estado": "En Progreso",
-		// 		"subEstado": "",
-		// 		"numeroSiniestro": "1234567890",
-		// 		"idSiniestro": "asfv1234",
-		// 		"patente": "GHB 233",
-		// 		"fechaAsignacion": "18/06/2020",
-		// 		"fechaVencimiento": "20/09/2020",
-		// 		"ultimaModificacion": "18/06/2020 12:20:00",
-		// 		"nivelDano": "Muerte",
-		// 		"nombreGestorReclamo": "Martin Ferro",
-		// 		"nombreGestorSiniestro": "Jose Ignacio Gonzalez",
-		// 		"coreOrigen": "Nova",
-		// 		"urlNova": "https://www.google.com",
-		// 		"urlCaraturla": "http://www.pdf995.com/samples/pdf.pdf",
-		// 		"urlDenuncia": "http://www.pdf995.com/samples/pdf.pdf"
-		// 	},
-		// 	{
-		// 		"id": "abc123",
-		// 		"nombreDamnificado": "Juan Jose Lopez",
-		// 		"nombreAsegurado": "",
-		// 		"estado": "En Progreso",
-		// 		"subEstado": "Honorarios Habilitados",
-		// 		"numeroSiniestro": "1234567890",
-		// 		"idSiniestro": "asfv1234",
-		// 		"patente": "A123",
-		// 		"fechaAsignacion": "18/06/2020",
-		// 		"fechaVencimiento": "20/09/2020",
-		// 		"ultimaModificacion": "18/06/2020 12:20:00",
-		// 		"nivelDano": "Lesion Grave",
-		// 		"nombreGestorReclamo": "Martin Ferro",
-		// 		"nombreGestorSiniestro": "Jose Ignacio Gonzalez",
-		// 		"coreOrigen": "GW",
-		// 		"urlNova": "https://www.google.com",
-		// 		"urlCaraturla": "http://www.pdf995.com/samples/pdf.pdf",
-		// 		"urlDenuncia": "http://www.pdf995.com/samples/pdf.pdf"
-		// 	},
-		// 	{
-		// 		"id": "abc123",
-		// 		"nombreDamnificado": "Juan Jose Lopez",
-		// 		"nombreAsegurado": "Pedro Alberto Poroto",
-		// 		"estado": "Realizado",
-		// 		"subEstado": "Honorarios Pendientes",
-		// 		"numeroSiniestro": "1234567890",
-		// 		"idSiniestro": "asfv1234",
-		// 		"patente": "A123",
-		// 		"fechaAsignacion": "20/03/2020" ,
-		// 		"fechaVencimiento": "20/09/2020",
-		// 		"ultimaModificacion": "18/06/2020 12:20:00",
-		// 		"nivelDano": "Lesion Leve",
-		// 		"nombreGestorReclamo": "Martin Ferro",
-		// 		"nombreGestorSiniestro": "Jose Ignacio Gonzalez",
-		// 		"coreOrigen": "Nova",
-		// 		"urlNova": "https://www.google.com",
-		// 		"urlCaraturla": "http://www.pdf995.com/samples/pdf.pdf",
-		// 		"urlDenuncia": "http://www.pdf995.com/samples/pdf.pdf"
-		// 	}
-		// ]`
-		// w.Write([]byte(body))
+		body := readFile("./resources/ordenes.JSON")
+
 		w.Write([]byte(body))
 	}
 }
