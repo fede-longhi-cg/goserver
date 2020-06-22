@@ -177,7 +177,6 @@ func orderService(w http.ResponseWriter, r *http.Request) {
 		if role == "3" {
 			body = readFile("./resources/ordenes_3.JSON")
 		}
-
 		w.Write([]byte(body))
 	}
 }
