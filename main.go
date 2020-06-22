@@ -151,7 +151,7 @@ func check(e error) {
 }
 
 func readFile() []byte {
-	file, err := os.Open("/resources/ordenes.JSON")
+	file, err := os.Open("./resources/ordenes.JSON")
 	check(err)
 	defer file.Close()
 
