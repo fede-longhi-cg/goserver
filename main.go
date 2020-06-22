@@ -166,8 +166,8 @@ func orderService(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
 		// params := mux.Vars(r)
 		// clientID := params["clientId"]
-		//body := readFile()
-		body := "123"
+		body := readFile()
+		// body := "123"
 		// body :=
 		// 	`[
 		// 	{
