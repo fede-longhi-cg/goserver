@@ -166,7 +166,17 @@ func orderService(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
 		// params := mux.Vars(r)
 		// clientID := params["clientId"]
-		body := readFile("./resources/ordenes.JSON")
+		role := r.Header.Get("role")
+		var body []byte
+		if role == "1" {
+			body = readFile("./resources/ordenes_1.JSON")
+		}
+		if role == "2" {
+			body = readFile("./resources/ordenes_2.JSON")
+		}
+		if role == "3" {
+			body = readFile("./resources/ordenes_3.JSON")
+		}
 
 		w.Write([]byte(body))
 	}
