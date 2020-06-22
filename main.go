@@ -251,7 +251,9 @@ func orderService(w http.ResponseWriter, r *http.Request) {
 		// 		"urlDenuncia": "http://www.pdf995.com/samples/pdf.pdf"
 		// 	}
 		// ]`
-		w.Write([]byte(body))
+		// w.Write([]byte(body))
+		w.Write(body)
+
 	}
 }
 
