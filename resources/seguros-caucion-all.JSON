@@ -1,0 +1,27 @@
+[
+    {
+        "ID": 1,
+        "descripcion": "obras publicas", 
+        "nombreDeIcono": "obrasPublicas.jpg"
+    },
+    {
+        "ID": 2,
+        "descripcion": "obras privadas", 
+        "nombreDeIcono": "obrasPrivadas.jpg"
+    },
+    {
+        "ID": 3,
+        "descripcion": "suministros y/o serivicios publicos", 
+        "nombreDeIcono": "sumPublicos.jpg"
+    },
+    {
+        "ID": 4,
+        "descripcion": "suministros y/o serivicios privados", 
+        "nombreDeIcono": "sumPrivados.jpg"
+    },
+    {
+        "ID": 11,
+        "descripcion": "garantias aduaneras", 
+        "nombreDeIcono": "garantiasAduaneras.jpg"
+    }
+]

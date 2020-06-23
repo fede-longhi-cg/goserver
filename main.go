@@ -181,11 +181,20 @@ func orderServiceHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func segurosDeCaucionHandler(w http.ResponseWriter, r *http.Request) {
+func segurosDeCaucionForClientHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	if r.Method == "GET" {
 		var body []byte
 		body = readFile("./resources/seguros-caucion.JSON")
+		w.Write(body)
+	}
+}
+
+func segurosDeCaucionHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	if r.Method == "GET" {
+		var body []byte
+		body = readFile("./resources/seguros-caucion-all.JSON")
 		w.Write(body)
 	}
 }
@@ -200,9 +209,14 @@ func main() {
 	router := mux.NewRouter().StrictSlash(true)
 
 	router.HandleFunc("/", homeLink)
-	router.HandleFunc("/client/{clientId}/ordenesDeServicio", orderServiceHandler)
-	router.HandleFunc("/client/{clientId}/segurosDeCaucion", segurosDeCaucionHandler)
 
+	//**** Sancor endpoints ****//
+	router.HandleFunc("/client/{clientId}/ordenesDeServicio", orderServiceHandler)
+	router.HandleFunc("/client/{clientId}/segurosDeCaucion", segurosDeCaucionForClientHandler)
+	router.HandleFunc("/client/segurosDeCaucion", segurosDeCaucionHandler)
+	//*********************************//
+
+	//*********************************//
 	router.HandleFunc("/regs-01/country/{country}/client-type/{clientType}", regs01Params)
 	router.HandleFunc("/regs-01", regs01)
 	router.HandleFunc("/regs-02/doc-type/{doc-type}/doc-number/{doc-number}", regs02Params)
