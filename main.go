@@ -214,6 +214,15 @@ func segurosDeCaucionForClientHandler(w http.ResponseWriter, r *http.Request) {
 		body = readFile("./resources/seguros-caucion.JSON")
 		w.WriteHeader(http.StatusOK)
 		w.Write(body)
+	}
+}
+
+func segurosDeCaucionHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	var body []byte
+	if r.Method == "GET" {
+		body = readFile("./resources/seguros-caucion-all.JSON")
+		w.Write(body)
 	} else if r.Method == "POST" {
 		b, err := ioutil.ReadAll(r.Body)
 		defer r.Body.Close()
@@ -229,15 +238,6 @@ func segurosDeCaucionForClientHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(body)
-	}
-}
-
-func segurosDeCaucionHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	if r.Method == "GET" {
-		var body []byte
-		body = readFile("./resources/seguros-caucion-all.JSON")
 		w.Write(body)
 	}
 }
