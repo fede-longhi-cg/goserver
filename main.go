@@ -18,6 +18,31 @@ type Message struct {
 	ClientType string `json:"client-type"`
 }
 
+//Archivo de los seguros de caucion
+type Archivo struct {
+	Name string `json:"name"`
+	File string `json:"file"`
+}
+
+//SeguroDeCaucion para sancor
+type SeguroDeCaucion struct {
+	BupID             int       `json:"bupId"`
+	ProductorID       int       `json:"productorId"`
+	Name              string    `json:"name"`
+	TipoDoc           string    `json:"tipoDocumento"`
+	NumeroDoc         int       `json:"numeroDocumento"`
+	CodigoArea        int       `json:"codigoArea"`
+	Phone             int       `json:"phone"`
+	Email             string    `json:"email"`
+	ProductoID        int       `json:"productId"`
+	CoberturaID       int       `json:"coberageId"`
+	SumaAsegurada     int       `json:"sumaAsegurada"`
+	Objeto            string    `json:"objeto"`
+	TipoCertificacion string    `json:"tipoCertificacion"`
+	Observaciones     string    `json:"observaciones"`
+	Archivos          []Archivo `json:"archivos"`
+}
+
 func homeLink(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	switch r.Method {
@@ -177,15 +202,33 @@ func orderServiceHandler(w http.ResponseWriter, r *http.Request) {
 		if role == "3" {
 			body = readFile("./resources/ordenes_3.JSON")
 		}
+		w.WriteHeader(http.StatusOK)
 		w.Write([]byte(body))
 	}
 }
 
 func segurosDeCaucionForClientHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
+	var body []byte
 	if r.Method == "GET" {
-		var body []byte
+		w.Header().Set("Content-Type", "application/json")
 		body = readFile("./resources/seguros-caucion.JSON")
+		w.WriteHeader(http.StatusOK)
+		w.Write(body)
+	} else if r.Method == "POST" {
+		b, err := ioutil.ReadAll(r.Body)
+		defer r.Body.Close()
+		if err != nil {
+			http.Error(w, err.Error(), 500)
+			return
+		}
+
+		var seguroCaucion SeguroDeCaucion
+		err = json.Unmarshal(b, &seguroCaucion)
+		if err != nil {
+			http.Error(w, err.Error(), 500)
+			return
+		}
+		w.WriteHeader(http.StatusOK)
 		w.Write(body)
 	}
 }
