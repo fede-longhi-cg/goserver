@@ -213,7 +213,7 @@ func main() {
 	//**** Sancor endpoints ****//
 	router.HandleFunc("/client/{clientId}/ordenesDeServicio", orderServiceHandler)
 	router.HandleFunc("/client/{clientId}/segurosDeCaucion", segurosDeCaucionForClientHandler)
-	router.HandleFunc("/client/segurosDeCaucion", segurosDeCaucionHandler)
+	router.HandleFunc("/segurosDeCaucion", segurosDeCaucionHandler)
 	//*********************************//
 
 	//*********************************//
