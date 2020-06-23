@@ -242,6 +242,15 @@ func segurosDeCaucionHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func segurosDeCaucionFilteredHandler(w http.ResponseWriter, r *http.Request) {
+	var body []byte
+	if r.Method == "GET" {
+		body = readFile("./resources/seguros-caucion-filtered.JSON")
+		w.WriteHeader(http.StatusOK)
+		w.Write(body)
+	}
+}
+
 func main() {
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -257,6 +266,7 @@ func main() {
 	router.HandleFunc("/client/{clientId}/ordenesDeServicio", orderServiceHandler)
 	router.HandleFunc("/client/{clientId}/segurosDeCaucion", segurosDeCaucionForClientHandler)
 	router.HandleFunc("/segurosDeCaucion", segurosDeCaucionHandler)
+	router.HandleFunc("/segurosDeCaucion/filtered", segurosDeCaucionFilteredHandler)
 	//*********************************//
 
 	//*********************************//

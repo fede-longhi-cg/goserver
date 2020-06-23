@@ -1,0 +1,28 @@
+[
+    {
+        "IdProducto": 1,
+        "Coberturas": [
+            {
+                "IdCobertura": 123,
+                "Descripcion": "i'm a description"
+            },
+            {
+                "IdCobertura": 678,
+                "Descripcion": "i'm another description"
+            }
+        ]
+    },
+    {
+        "IdProducto": 2,
+        "Coberturas": [
+            {
+                "IdCobertura": 123,
+                "Descripcion": "i'm a description"
+            },
+            {
+                "IdCobertura": 678,
+                "Descripcion": "i'm another description"
+            }
+        ]
+    },
+]
