@@ -26,21 +26,21 @@ type Archivo struct {
 
 //SeguroDeCaucion para sancor
 type SeguroDeCaucion struct {
-	BupID       int    `json:"bupId"`
-	ProductorID int    `json:"productorId"`
-	Name        string `json:"name"`
-	// TipoDoc           string    `json:"tipoDocumento"`
-	// NumeroDoc         int       `json:"numeroDocumento"`
-	// CodigoArea        int       `json:"codigoArea"`
-	// Phone             int       `json:"phone"`
-	// Email             string    `json:"email"`
-	// ProductoID        int       `json:"proheroku ductId"`
-	// CoberturaID       int       `json:"coberageId"`
-	// SumaAsegurada     int       `json:"sumaAsegurada"`
-	// Objeto            string    `json:"objeto"`
-	// TipoCertificacion string    `json:"tipoCertificacion"`
-	// Observaciones     string    `json:"observaciones"`
-	// Archivos          []Archivo `json:"archivos"`
+	BupID             int       `json:"bupId"`
+	ProductorID       int       `json:"productorId"`
+	Name              string    `json:"name"`
+	TipoDoc           string    `json:"tipoDocumento"`
+	NumeroDoc         int       `json:"numeroDocumento"`
+	CodigoArea        int       `json:"codigoArea"`
+	Phone             int       `json:"phone"`
+	Email             string    `json:"email"`
+	ProductoID        int       `json:"proheroku ductId"`
+	CoberturaID       int       `json:"coberageId"`
+	SumaAsegurada     int       `json:"sumaAsegurada"`
+	Objeto            string    `json:"objeto"`
+	TipoCertificacion string    `json:"tipoCertificacion"`
+	Observaciones     string    `json:"observaciones"`
+	Archivos          []Archivo `json:"archivos"`
 }
 
 func homeLink(w http.ResponseWriter, r *http.Request) {
