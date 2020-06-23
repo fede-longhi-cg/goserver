@@ -1,0 +1,14 @@
+[
+    {
+        "cupoDisponible": "2",
+        "fechaUltimoBalance": "01/01/2000",
+        "solicitudConvenio": "convenio 123",
+        "productor": "George Gerardo Moyano"
+    },
+    {
+        "cupoDisponible": "3",
+        "fechaUltimoBalance": "15/06/2018",
+        "solicitudConvenio": "convenio 124",
+        "productor": "George Gerardo Moyano"
+    }
+]
