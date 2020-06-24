@@ -9,6 +9,8 @@ import (
 	"strconv"
 	"strings"
 
+	"src/utils"
+
 	"github.com/gorilla/mux"
 )
 
@@ -169,23 +171,6 @@ func regs02Params(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func check(e error) {
-	if e != nil {
-		panic(e)
-	}
-}
-
-func readFile(filename string) []byte {
-	file, err := os.Open(filename)
-	check(err)
-	defer file.Close()
-
-	data, err := ioutil.ReadAll(file)
-	check(err)
-
-	return data
-}
-
 func orderServiceHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	if r.Method == "GET" {
@@ -194,13 +179,13 @@ func orderServiceHandler(w http.ResponseWriter, r *http.Request) {
 		role := r.Header.Get("role")
 		var body []byte
 		if role == "1" {
-			body = readFile("./resources/ordenes_1.JSON")
+			body = utils.ReadFile("./resources/ordenes_1.JSON")
 		}
 		if role == "2" {
-			body = readFile("./resources/ordenes_2.JSON")
+			body = utils.ReadFile("./resources/ordenes_2.JSON")
 		}
 		if role == "3" {
-			body = readFile("./resources/ordenes_3.JSON")
+			body = utils.ReadFile("./resources/ordenes_3.JSON")
 		}
 		w.WriteHeader(http.StatusOK)
 		w.Write([]byte(body))
@@ -211,7 +196,7 @@ func segurosDeCaucionForClientHandler(w http.ResponseWriter, r *http.Request) {
 	var body []byte
 	if r.Method == "GET" {
 		w.Header().Set("Content-Type", "application/json")
-		body = readFile("./resources/seguros-caucion.JSON")
+		body = utils.ReadFile("./resources/seguros-caucion.JSON")
 		w.WriteHeader(http.StatusOK)
 		w.Write(body)
 	}
@@ -221,7 +206,7 @@ func segurosDeCaucionHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	var body []byte
 	if r.Method == "GET" {
-		body = readFile("./resources/seguros-caucion-all.JSON")
+		body = utils.ReadFile("./resources/seguros-caucion-all.JSON")
 		w.Write(body)
 	} else if r.Method == "POST" {
 		b, err := ioutil.ReadAll(r.Body)
@@ -245,7 +230,7 @@ func segurosDeCaucionHandler(w http.ResponseWriter, r *http.Request) {
 func segurosDeCaucionFilteredHandler(w http.ResponseWriter, r *http.Request) {
 	var body []byte
 	if r.Method == "GET" {
-		body = readFile("./resources/seguros-caucion-filtered.JSON")
+		body = utils.ReadFile("./resources/seguros-caucion-filtered.JSON")
 		w.WriteHeader(http.StatusOK)
 		w.Write(body)
 	}
