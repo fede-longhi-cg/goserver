@@ -1,4 +1,4 @@
-module github.com/heroku/main
+module github.com/heroku/src/main
 
 go 1.12
 
